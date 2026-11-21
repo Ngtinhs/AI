@@ -1,38 +1,73 @@
+from functools import lru_cache
+
 from google import genai
 from google.genai import types
+from pydantic import ValidationError
 
-from config.settings import settings
+from config.settings import GEMINI_TEMPERATURE, settings
 from models.schemas import TutorAnalysis
-from prompts.tutor_prompt import LEARNER_CONTEXT, build_tutor_prompt
+from prompts.tutor_prompt import build_learner_context, build_tutor_prompt
+from utils.timing import StageTimer, measure
+
+MISSING_API_KEY_MESSAGE = "Chưa tìm thấy GEMINI_API_KEY. Hãy thêm API Key vào file .env."
 
 
-def analyze_transcript(transcript: str) -> TutorAnalysis:
-    """Gửi Context + Prompt + Transcript đến Gemini và kiểm tra kết quả."""
-    if not settings.gemini_api_key:
-        raise RuntimeError("Thiếu GEMINI_API_KEY trong file .env.")
+@lru_cache(maxsize=1)
+def _get_client() -> genai.Client:
+    return genai.Client(
+        api_key=settings.gemini_api_key,
+        http_options=types.HttpOptions(timeout=settings.gemini_timeout_seconds * 1000),
+    )
 
+
+def _build_config() -> types.GenerateContentConfig:
+    config = types.GenerateContentConfig(
+        response_mime_type="application/json",
+        response_schema=TutorAnalysis,
+        temperature=GEMINI_TEMPERATURE,
+    )
+    if settings.gemini_thinking_budget is not None:
+        config.thinking_config = types.ThinkingConfig(thinking_budget=settings.gemini_thinking_budget)
+    return config
+
+
+def is_configured() -> bool:
+    return bool(settings.gemini_api_key)
+
+
+def analyze_transcript(
+    transcript: str,
+    timer: StageTimer | None = None,
+    learner_level: str | None = None,
+) -> TutorAnalysis:
+    if not is_configured():
+        raise RuntimeError(MISSING_API_KEY_MESSAGE)
     if not transcript or not transcript.strip():
         raise ValueError("Transcript đang trống.")
 
-    client = genai.Client(api_key=settings.gemini_api_key)
-    prompt = build_tutor_prompt(LEARNER_CONTEXT, transcript)
+    prompt = build_tutor_prompt(build_learner_context(learner_level), transcript)
 
     try:
-        response = client.models.generate_content(
-            model=settings.gemini_model,
-            contents=prompt,
-            config=types.GenerateContentConfig(
-                response_mime_type="application/json",
-                response_schema=TutorAnalysis,
-                temperature=0.2,
-            ),
-        )
+        with measure(timer, "Gemini API"):
+            response = _get_client().models.generate_content(
+                model=settings.gemini_model,
+                contents=prompt,
+                config=_build_config(),
+            )
+    except Exception as exc:  # Lỗi mạng, timeout, quota, API key sai...
+        raise RuntimeError(f"Không gọi được Gemini: {exc}") from exc
 
-        if not response.text:
-            raise RuntimeError("Gemini không trả về nội dung.")
+    if timer and response.usage_metadata:
+        usage = response.usage_metadata
+        timer.info["prompt_tokens"] = usage.prompt_token_count
+        timer.info["thinking_tokens"] = usage.thoughts_token_count
+        timer.info["output_tokens"] = usage.candidates_token_count
 
-        # Parse JSON và xác thực kiểu dữ liệu bằng Pydantic.
-        return TutorAnalysis.model_validate_json(response.text)
+    if not response.text:
+        raise RuntimeError("Gemini không trả về nội dung.")
 
-    except Exception as exc:
-        raise RuntimeError(f"Lỗi khi gọi hoặc xử lý phản hồi Gemini: {exc}") from exc
+    try:
+        with measure(timer, "Validation"):
+            return TutorAnalysis.model_validate_json(response.text)
+    except ValidationError as exc:
+        raise RuntimeError(f"Phản hồi của Gemini không đúng định dạng bài học: {exc}") from exc

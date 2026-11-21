@@ -1,0 +1,24 @@
+# Bí mật: truyền vào lúc chạy qua env_file, không đóng gói vào image
+.env
+.streamlit/secrets.toml
+
+# Dữ liệu người dùng: nằm trong volume, không nằm trong image
+data/
+benchmark_results/
+
+# Môi trường và file sinh ra khi chạy
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Không cần khi chạy app
+.git/
+.devcontainer/
+.vscode/
+tests/
+*.pptx
+Dockerfile
+docker-compose.yml
+.dockerignore

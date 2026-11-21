@@ -5,3 +5,10 @@ __pycache__/
 .env
 .streamlit/secrets.toml
 .DS_Store
+
+# Dữ liệu người dùng (JSON) không đưa lên Git
+data/*.json
+data/*.tmp
+data/*.db
+data/*.db-journal
+benchmark_results/

@@ -79,7 +79,7 @@ Các biến cấu hình chính:
 - `GEMINI_API_KEY`
 - `GEMINI_MODEL`
 
-Mô hình mặc định hiện tại: `gemini-2.5-flash`.
+Mô hình mặc định hiện tại: `gemini-3.5-flash-lite`.
 
 ### 3.3. models/schemas.py
 
@@ -214,7 +214,7 @@ Ví dụ:
 
 ```env
 GEMINI_API_KEY=your_gemini_api_key
-GEMINI_MODEL=gemini-2.5-flash
+GEMINI_MODEL=gemini-3.5-flash-lite
 ```
 
 File `.env.example` cung cấp mẫu cấu hình để người khác có thể thiết lập môi trường.

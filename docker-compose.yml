@@ -1,0 +1,14 @@
+services:
+  app:
+    build: .
+    image: ai-english-tutor:latest
+    container_name: ai-english-tutor
+    env_file: .env          # GEMINI_API_KEY, GEMINI_MODEL... (copy từ .env.example)
+    ports:
+      - "8501:8501"
+    volumes:
+      - app-data:/app/data  # data/app.db: giữ tài khoản, profile, bài học khi restart/deploy lại
+    restart: unless-stopped
+
+volumes:
+  app-data:

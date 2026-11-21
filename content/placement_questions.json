@@ -1,0 +1,140 @@
+{
+  "bank_version": "w2-12q-v1",
+  "questions": [
+    {
+      "id": "A1-G1",
+      "level": "A1",
+      "skill": "grammar",
+      "passage": null,
+      "question": "She ___ a teacher.",
+      "options": ["am", "is", "are", "be"],
+      "correct_index": 1,
+      "explanation_vi": "Chủ ngữ số ít \"She\" đi với động từ to be \"is\"."
+    },
+    {
+      "id": "A1-V1",
+      "level": "A1",
+      "skill": "vocabulary",
+      "passage": null,
+      "question": "Which word is a color?",
+      "options": ["Table", "Run", "Blue", "Happy"],
+      "correct_index": 2,
+      "explanation_vi": "\"Blue\" (màu xanh dương) là từ chỉ màu sắc. Các từ còn lại là đồ vật, hành động và cảm xúc."
+    },
+    {
+      "id": "A1-R1",
+      "level": "A1",
+      "skill": "reading",
+      "passage": "My name is Lan. I am 20 years old. I live in Da Nang with my parents. I have a small cat.",
+      "question": "Who does Lan live with?",
+      "options": ["Her parents", "Her friends", "Her sister", "Alone"],
+      "correct_index": 0,
+      "explanation_vi": "Đoạn văn ghi \"I live in Da Nang with my parents\" – Lan sống với bố mẹ."
+    },
+    {
+      "id": "A2-G1",
+      "level": "A2",
+      "skill": "grammar",
+      "passage": null,
+      "question": "Yesterday I ___ to the market with my mother.",
+      "options": ["go", "goes", "went", "going"],
+      "correct_index": 2,
+      "explanation_vi": "\"Yesterday\" chỉ quá khứ nên dùng thì quá khứ đơn: go → went."
+    },
+    {
+      "id": "A2-V1",
+      "level": "A2",
+      "skill": "vocabulary",
+      "passage": null,
+      "question": "I need to ___ a table at the restaurant for tonight.",
+      "options": ["book", "read", "write", "open"],
+      "correct_index": 0,
+      "explanation_vi": "\"Book a table\" nghĩa là đặt bàn trước ở nhà hàng."
+    },
+    {
+      "id": "A2-R1",
+      "level": "A2",
+      "skill": "reading",
+      "passage": "Dear Tom, I'm sorry, but I can't come to your party on Saturday. My grandmother is ill, so I have to visit her in the hospital. Can we meet next week instead? Best, Anna",
+      "question": "Why can't Anna go to the party?",
+      "options": [
+        "She has to work.",
+        "She is ill.",
+        "She has to visit her grandmother.",
+        "She doesn't like parties."
+      ],
+      "correct_index": 2,
+      "explanation_vi": "Anna viết \"My grandmother is ill, so I have to visit her\" – người bị ốm là bà, không phải Anna."
+    },
+    {
+      "id": "B1-G1",
+      "level": "B1",
+      "skill": "grammar",
+      "passage": null,
+      "question": "If it ___ tomorrow, we will stay at home.",
+      "options": ["will rain", "rained", "would rain", "rains"],
+      "correct_index": 3,
+      "explanation_vi": "Câu điều kiện loại 1: If + hiện tại đơn, will + động từ. Vì vậy dùng \"rains\"."
+    },
+    {
+      "id": "B1-V1",
+      "level": "B1",
+      "skill": "vocabulary",
+      "passage": null,
+      "question": "The meeting was ___ because the manager was sick.",
+      "options": ["put on", "called off", "taken up", "looked after"],
+      "correct_index": 1,
+      "explanation_vi": "\"Call off\" nghĩa là hủy bỏ (cuộc họp, sự kiện)."
+    },
+    {
+      "id": "B1-R1",
+      "level": "B1",
+      "skill": "reading",
+      "passage": "Many people think that working from home is always easier. However, a recent survey found that almost half of remote workers feel lonely, and many find it hard to stop working at the end of the day. Experts suggest setting clear working hours and taking regular breaks.",
+      "question": "According to the text, what is one problem of working from home?",
+      "options": [
+        "Workers earn less money.",
+        "Managers do not trust workers.",
+        "It can be difficult to stop working.",
+        "Internet connections are slow."
+      ],
+      "correct_index": 2,
+      "explanation_vi": "Đoạn văn nói \"many find it hard to stop working at the end of the day\" – khó dừng làm việc khi hết ngày."
+    },
+    {
+      "id": "B2-G1",
+      "level": "B2",
+      "skill": "grammar",
+      "passage": null,
+      "question": "By the time we arrived at the station, the train ___.",
+      "options": ["has left", "had already left", "would leave", "already leaves"],
+      "correct_index": 1,
+      "explanation_vi": "Hành động xảy ra trước một hành động khác trong quá khứ dùng quá khứ hoàn thành: \"had already left\"."
+    },
+    {
+      "id": "B2-V1",
+      "level": "B2",
+      "skill": "vocabulary",
+      "passage": null,
+      "question": "She was ___ to accept the job offer because the salary was low.",
+      "options": ["eager", "delighted", "grateful", "reluctant"],
+      "correct_index": 3,
+      "explanation_vi": "\"Reluctant\" nghĩa là miễn cưỡng, không muốn. Lương thấp nên cô ấy không muốn nhận việc."
+    },
+    {
+      "id": "B2-R1",
+      "level": "B2",
+      "skill": "reading",
+      "passage": "Although electric cars produce no exhaust emissions, critics point out that their overall environmental benefit depends largely on how the electricity is generated. In countries that still rely heavily on coal, the reduction in carbon emissions may be smaller than many buyers assume.",
+      "question": "What is the writer's main point?",
+      "options": [
+        "The benefit of electric cars depends on how the electricity is generated.",
+        "Electric cars are worse for the environment than petrol cars.",
+        "Countries should stop using coal immediately.",
+        "Most buyers know exactly how their electricity is produced."
+      ],
+      "correct_index": 0,
+      "explanation_vi": "Ý chính: lợi ích môi trường của xe điện \"depends largely on how the electricity is generated\"."
+    }
+  ]
+}
